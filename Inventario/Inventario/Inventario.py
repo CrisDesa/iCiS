@@ -25,13 +25,14 @@ def obtener_datos(computers=('localhost')):
         datos_todo[compu] = datos
     return datos_todo
 
-def 
 
-todos_servidores = obtener_datos(computers)
-compu={}
-for compu in todos_servidores:
-    for caracteristica in todos_servidores[compu]:
-        salida = '{}: {}'.format(caracteristica, todos_servidores[compu][caracteristica])
-        print(salida)
+def volcar_datos (todos_servidores=obtener_datos(computers)):
+    compu={}
+    for compu in todos_servidores:
+        for caracteristica in todos_servidores[compu]:
+            salida = '{}: {}'.format(caracteristica, todos_servidores[compu][caracteristica])
+            print(salida)
 
+
+volcar_datos()
 
