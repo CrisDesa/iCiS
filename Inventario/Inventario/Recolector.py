@@ -4,14 +4,14 @@ class RecoWin:
     ''' Obtiene los datos de cada equipo en la lista de computadoras'''
     
     
-    def __init__(self):
-        self.computers = computers
+    def __init__(self,lista_computers):
+        self.computers = lista_computers
 
-    def obtener_datos(self,computers):
+    def obtener_datos(self):
       
         datos_todo = {}
         
-        for compu in computers:
+        for compu in self.computers:
             computer = wmi.WMI(compu)
             datos = {}
             datos["nombre"] = compu
@@ -38,6 +38,6 @@ def volcar_datos (todos_servidores):
     return salida
 
 computers = ('P522881',)
-volcar_datos(todos_servidores = RecoWin().obtener_datos(computers))
+volcar_datos( RecoWin(computers).obtener_datos())
 
 
