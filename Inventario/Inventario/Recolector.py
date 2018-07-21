@@ -1,43 +1,54 @@
 import wmi
-class RecoWin:
 
-    ''' Obtiene los datos de cada equipo en la lista de computadoras'''
-    
-    
+class RecoWin:
+    '''Obtiene los datos de cada equipo en la lista de computadoras con sistema operativo Windows'''
+        
     def __init__(self,lista_computers):
         self.computers = lista_computers
 
-    def obtener_datos(self):
-      
-        datos_todo = {}
+    def capturar_datos(self):
+        '''Realiza consulta WMI y las almacena en un diccionario con los nombres de las características como paramteros
+           con un control de fallo de conexion'''
+        
+        datos_todo = {}  #limpia diccionario donde carga datos del equipo
         
         for compu in self.computers:
-            computer = wmi.WMI(compu)
             datos = {}
-            datos["nombre"] = compu
-            for caracteristica in computer.Win32_OperatingSystem():
-                datos["SO_version"] = (caracteristica.Caption)
-                datos["SO_SP"] = (caracteristica.CSDVersion)
+            try: 
+                computer = wmi.WMI(compu)
+            except:
+                datos["conexion"] = False
+            else:
+                datos["nombre"] = compu
+                datos["conexion"] = True 
+            
+                for caracteristica in computer.Win32_OperatingSystem():
+                    datos["SO_version"] = (caracteristica.Caption)
+                    datos["SO_SP"] = (caracteristica.CSDVersion)
         
-            for caracteristica in computer.Win32_computersystem():
-                datos["Dominio"] = caracteristica.Domain
-                datos["Marca"] = caracteristica.Manufacturer
-                datos["Modelo"] = caracteristica.Model
+                for caracteristica in computer.Win32_computersystem():
+                    datos["Dominio"] = caracteristica.Domain
+                    datos["Marca"] = caracteristica.Manufacturer
+                    datos["Modelo"] = caracteristica.Model
 
             datos_todo[compu] = datos
+
         return datos_todo
 
 
-def volcar_datos (todos_servidores):
+def volcar_datos (datos_servidores):
     compu={}
-    for compu in todos_servidores:
+    for compu in datos_servidores:
+        print('')
         print(compu)
-        for caracteristica in todos_servidores[compu]:
-            salida = '{}: {}'.format(caracteristica, todos_servidores[compu][caracteristica])
+        for caracteristica in datos_servidores[compu]:
+            salida = '{}: {}'.format(caracteristica, datos_servidores[compu][caracteristica])
             print(salida)
+
     return salida
 
-computers = ('P522881',)
-volcar_datos( RecoWin(computers).obtener_datos())
+computers = ('Error_1','P522881','stbuetmadm07',)
+volcar_datos(RecoWin(computers).capturar_datos())
 
 
+                                          
