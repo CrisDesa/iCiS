@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using iCiS.Models;
+using iCiS.Data;
 
-namespace Inventario
+namespace iCiS
+
 {
     public class Startup
     {
@@ -25,7 +26,7 @@ namespace Inventario
         {
             services.AddMvc();
 
-            services.AddDbContext<iCiSContext>(options =>
+            services.AddEntityFrameworkSqlServer().AddDbContext<iCiSContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("iCiSContext")));
         }
 
@@ -42,7 +43,7 @@ namespace Inventario
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+             app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
