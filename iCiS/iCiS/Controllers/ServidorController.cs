@@ -11,11 +11,11 @@ using iCiS.Models;
 
 namespace iCiS.Controllers
 {
-    public class ServidoresController : Controller
+    public class ServidorController : Controller
     {
-        private readonly iCiSContext _context;
+        private readonly ServidorContext _context;
 
-        public ServidoresController(iCiSContext context)
+        public ServidorController(ServidorContext context)
         {
             _context = context;
         }
@@ -23,7 +23,7 @@ namespace iCiS.Controllers
         // GET: Servidors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Servidores.ToListAsync());
+            return View(await _context.Servidor.ToListAsync());
         }
 
         // GET: Servidors/Details/5
@@ -34,7 +34,7 @@ namespace iCiS.Controllers
                 return NotFound();
             }
 
-            var servidor = await _context.Servidores
+            var servidor = await _context.Servidor
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (servidor == null)
             {
@@ -74,7 +74,7 @@ namespace iCiS.Controllers
                 return NotFound();
             }
 
-            var servidor = await _context.Servidores.SingleOrDefaultAsync(m => m.ID == id);
+            var servidor = await _context.Servidor.SingleOrDefaultAsync(m => m.ID == id);
             if (servidor == null)
             {
                 return NotFound();
@@ -87,7 +87,7 @@ namespace iCiS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,Sistema_operativo,Fecha_captura")] Servidor servidor)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,Conexion,Fecha_captura")] Servidor servidor)
         {
             if (id != servidor.ID)
             {
@@ -125,7 +125,7 @@ namespace iCiS.Controllers
                 return NotFound();
             }
 
-            var servidor = await _context.Servidores
+            var servidor = await _context.Servidor
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (servidor == null)
             {
@@ -140,15 +140,15 @@ namespace iCiS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var servidor = await _context.Servidores.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Servidores.Remove(servidor);
+            var servidor = await _context.Servidor.SingleOrDefaultAsync(m => m.ID == id);
+            _context.Servidor.Remove(servidor);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ServidorExists(int id)
         {
-            return _context.Servidores.Any(e => e.ID == id);
+            return _context.Servidor.Any(e => e.ID == id);
         }
     }
 }

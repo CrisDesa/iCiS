@@ -10,30 +10,15 @@ namespace iCiS.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new iCiSContext(
-                serviceProvider.GetRequiredService<DbContextOptions<iCiSContext>>()))
+            using (var context = new ServidorContext(
+                serviceProvider.GetRequiredService<DbContextOptions<ServidorContext>>()))
             {
                 // revisa para ver si existe algun servidor
-                if (context.Servidores.Any())
+                if (context.Servidor.Any())
                 {
                     return; // la base ha sido minada
                 }
-                context.Servidores.AddRange(
-
-                    new Servidor
-                    {
-                        Nombre = "Servidor2",
-                        Conexion = true,
-                        Fecha_captura = DateTime.Now
-                    },
-
-                    new Servidor
-                    {
-                        Nombre = "Servidor3",
-                        Conexion = false,
-                        Fecha_captura = DateTime.Now
-                    }
-                    );
+                context.Servidor.AddRange();
                 context.SaveChanges();
             }
         }

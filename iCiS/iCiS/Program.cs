@@ -27,7 +27,7 @@ namespace iCiS
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<iCiSContext>();
+                    var context = services.GetRequiredService<ServidorContext>();
                     context.Database.Migrate();
                     SeedData.Initialize(services);
                     //DbInitializer.Initialize(context);

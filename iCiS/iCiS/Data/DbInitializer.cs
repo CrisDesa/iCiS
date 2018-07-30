@@ -6,11 +6,11 @@ namespace iCiS.Data
 {
     public class DbInitializer
     {
-        public static void Initialize(iCiSContext context)
+        public static void Initialize(ServidorContext context)
         {
             context.Database.EnsureCreated();
             // ver algun servidor
-            if (context.Servidores.Any())
+            if (context.Servidor.Any())
             {
                 return; // DB ha sido iniciada
             }
@@ -22,7 +22,7 @@ namespace iCiS.Data
             };
             foreach (Servidor s in servidores)
             {
-                context.Servidores.Add(s);
+                context.Servidor.Add(s);
             }
             context.SaveChanges();
 
