@@ -11,8 +11,8 @@ namespace iCiS.Models
     {
         public int ID { get; set;  }
         public string Nombre { get; set; }
-        public bool Conexion { get; set; }
-        public DateTime Fecha_captura { get; set; }
+        public string Conexion { get; set; }
+        public string Fecha_captura { get; set; }
 
     }
 }

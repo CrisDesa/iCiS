@@ -18,7 +18,16 @@ namespace iCiS.Models
                 {
                     return; // la base ha sido minada
                 }
-                context.Servidor.AddRange();
+                context.Servidor.AddRange(
+                    new Servidor
+                    {
+                        ID = 1,
+                        Nombre = "servidor1",
+                        Conexion = "no",
+                        Fecha_captura = "trucha"
+                    }
+                    
+                    );
                 context.SaveChanges();
             }
         }
