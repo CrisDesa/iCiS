@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using iCiS.Models;
 using iCiS.Data;
 
 
@@ -26,7 +28,9 @@ namespace iCiS
                 try
                 {
                     var context = services.GetRequiredService<iCiSContext>();
-                    DbInitializer.Initialize(context);
+                    context.Database.Migrate();
+                    SeedData.Initialize(services);
+                    //DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {

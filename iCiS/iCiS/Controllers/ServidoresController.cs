@@ -11,11 +11,11 @@ using iCiS.Models;
 
 namespace iCiS.Controllers
 {
-    public class ServidorsController : Controller
+    public class ServidoresController : Controller
     {
         private readonly iCiSContext _context;
 
-        public ServidorsController(iCiSContext context)
+        public ServidoresController(iCiSContext context)
         {
             _context = context;
         }

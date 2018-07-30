@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using iCiS.Data;
+using iCiS.Models;
 
 namespace iCiS
 
@@ -24,10 +24,9 @@ namespace iCiS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ServidorContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ServidorContext")));
             services.AddMvc();
-
-            services.AddEntityFrameworkSqlServer().AddDbContext<iCiSContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("iCiSContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
