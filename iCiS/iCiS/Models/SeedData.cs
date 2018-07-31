@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System;
-using iCiS.Data;
 
 namespace iCiS.Models
 {
@@ -23,10 +22,25 @@ namespace iCiS.Models
                     {
                         ID = 1,
                         Nombre = "servidor1",
-                        Conexion = "no",
-                        Fecha_captura = "trucha"
+                        Conexion = true,
+                        Fecha_captura = "2018-07-31"
+                    },
+                    new Servidor
+                    {
+                        ID = 2,
+                        Nombre = "Primero",
+                        Conexion = false,
+                        Fecha_captura = DateTime.Now.ToString("yyyy-MM-dd")
+                    },
+                    new Servidor
+                    {
+                        ID = 3,
+                        Nombre = "Segundo",
+                        Conexion = false,
+                        Fecha_captura = "2018-06-29"
                     }
-                    
+
+
                     );
                 context.SaveChanges();
             }

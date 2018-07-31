@@ -17,9 +17,7 @@ namespace iCiS.Data
 
             var servidores = new Servidor[]
             {
-                new Servidor{ID=2,Nombre="Primero",Conexion="false",Fecha_captura="trucha2" },
-                new Servidor{ID=3,Nombre="Segundo",Conexion="false",Fecha_captura="trucha3" }
-            };
+           };
             foreach (Servidor s in servidores)
             {
                 context.Servidor.Add(s);
